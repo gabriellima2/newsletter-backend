@@ -8,6 +8,6 @@ export class Subscribe {
     const buildedEmail = buildMakeEmail(email);
     const isValid = buildedEmail.validate();
     if (!isValid) throw new Error("Invalid email value!");
-    return await this.repository.insert({ email });
+    return await this.repository.insert(email);
   }
 }
