@@ -1,6 +1,5 @@
-import { Email } from "../../../entities/email";
-import { User } from "../../../entities/user";
+import { UserData } from "../../../domain/user-data";
 
 export interface IUserRepository {
-  insert: ({ email }: Email) => Promise<Readonly<User>>;
+  insert: (email: string) => Promise<Readonly<UserData>>;
 }

@@ -1,13 +1,12 @@
 import { TRepository } from "../../../infra/services/prisma-services";
 import { IUserRepository } from "./iuser-repository";
 
-import { Email } from "../../../entities/email";
-import { User } from "../../../entities/user";
+import { UserData } from "../../../domain/user-data";
 
 export class UserRepository implements IUserRepository {
   constructor(private readonly repository: TRepository) {}
 
-  async insert({ email }: Email): Promise<User> {
+  async insert(email: string): Promise<UserData> {
     try {
       const insertedUser = await this.repository.user.create({
         data: {
