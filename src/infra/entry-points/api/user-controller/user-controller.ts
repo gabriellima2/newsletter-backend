@@ -1,8 +1,15 @@
 import { Request } from "express";
 
 import { UserPrismaRepositoryAdapter } from "@/infra/adapters/orm/prisma/user-prisma-repository-adapter";
-import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
 import { createUserValidation } from "@/validations/create-user-validation";
+
+import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
+import { UserEntity } from "@/domain/entities/user-entity";
+
+import {
+  HttpStatusCode,
+  defaultHeaders,
+} from "@/data/protocols/http-protocols";
 
 export class UserController {
   constructor(private readonly repository: UserPrismaRepositoryAdapter) {}
@@ -17,19 +24,17 @@ export class UserController {
     try {
       const insertedUser = await subscribeCase.execute({ email });
       return {
-        headers: {
-          "Content-Type": "application/json",
-          statusCode: 201,
-          body: { insertedUser },
-        },
+        ...defaultHeaders<UserEntity>({
+          statusCode: HttpStatusCode.ok,
+          body: insertedUser,
+        }),
       };
     } catch (error) {
       return {
-        headers: {
-          "Content-Type": "application/json",
-          statusCode: 400,
-          body: { error },
-        },
+        ...defaultHeaders<unknown>({
+          statusCode: HttpStatusCode.badRequest,
+          body: error,
+        }),
       };
     }
   }
