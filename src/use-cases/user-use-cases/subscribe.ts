@@ -1,13 +1,8 @@
-import { buildMakeEmail } from "../../domain/email-domain";
-import { UserData } from "../../domain/user-data";
+import {
+  InsertUserParams,
+  UserEntity,
+} from "../../domain/entities/user-entity";
 
-export class Subscribe {
-  constructor(private readonly repository: any) {}
-
-  async execute(email: string): Promise<UserData> {
-    const buildedEmail = buildMakeEmail(email);
-    const isValid = buildedEmail.validate();
-    if (!isValid) throw new Error("Invalid email value!");
-    return await this.repository.insert(email);
-  }
+export interface Subscribe {
+  execute: (data: InsertUserParams) => Promise<UserEntity>;
 }
