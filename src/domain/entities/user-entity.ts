@@ -3,4 +3,4 @@ export interface UserEntity {
   email: string;
 }
 
-export type InsertUserParams = Omit<UserEntity, "id">;
+export type CreateUserParams = Omit<UserEntity, "id">;

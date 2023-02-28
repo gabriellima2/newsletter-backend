@@ -1,11 +1,11 @@
-import { InsertUserParams, UserEntity } from "@/domain/entities/user-entity";
+import { CreateUserParams, UserEntity } from "@/domain/entities/user-entity";
 import { UserRepository } from "@/domain/repositories/user-repository";
 import { MainRepository } from "@/infra/services/prisma-services";
 
 export class UserPrismaRepositoryAdapter implements UserRepository {
   constructor(private readonly repository: MainRepository) {}
 
-  async insert(data: InsertUserParams): Promise<UserEntity> {
+  async create(data: CreateUserParams): Promise<UserEntity> {
     try {
       const insertedUser = await this.repository.user.create({ data });
       return Object.freeze(insertedUser);

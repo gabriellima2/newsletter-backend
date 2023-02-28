@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
-import { makeUserPrismaControllerAdapter } from "../../../adapters/orm/prisma";
+import type { Request } from "express";
+
+import { makeUserPrismaControllerAdapter } from "@/infra/adapters/orm/prisma";
 import { UserController } from "./user-controller";
 
 export const makeUserController = () => {

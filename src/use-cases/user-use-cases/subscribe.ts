@@ -1,5 +1,5 @@
-import { InsertUserParams, UserEntity } from "@/domain/entities/user-entity";
+import { CreateUserParams, UserEntity } from "@/domain/entities/user-entity";
 
 export interface Subscribe {
-  execute: (data: InsertUserParams) => Promise<UserEntity>;
+  execute: (data: CreateUserParams) => Promise<UserEntity>;
 }
