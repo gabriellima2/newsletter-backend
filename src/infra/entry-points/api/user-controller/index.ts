@@ -7,5 +7,7 @@ export const makeUserController = () => {
   return {
     create: (req: Request) =>
       new UserController(makeUserPrismaControllerAdapter()).create(req),
+    delete: (req: Request) =>
+      new UserController(makeUserPrismaControllerAdapter()).delete(req),
   };
 };

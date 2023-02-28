@@ -4,3 +4,4 @@ export interface UserEntity {
 }
 
 export type CreateUserParams = Omit<UserEntity, "id">;
+export type DeleteUserParams = Pick<UserEntity, "id">;

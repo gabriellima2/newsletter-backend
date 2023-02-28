@@ -7,4 +7,9 @@ router.post("/user", async (req: Request, res: Response) => {
   res.send(response);
 });
 
+router.delete("/user/:id", async (req: Request, res: Response) => {
+  const response = await makeUserController().delete(req);
+  res.send(response);
+});
+
 export const userRoutes = router;

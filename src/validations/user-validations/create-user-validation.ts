@@ -1,4 +1,4 @@
-import { CreateUserParams } from "../domain/entities/user-entity";
+import { CreateUserParams } from "@/domain/entities/user-entity";
 
 export function createUserValidation({ email }: CreateUserParams): boolean {
   if (!email) {
