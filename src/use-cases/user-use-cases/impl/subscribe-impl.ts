@@ -1,8 +1,5 @@
-import { UserRepository } from "../../../domain/repositories/user-repository";
-import {
-  InsertUserParams,
-  UserEntity,
-} from "../../../domain/entities/user-entity";
+import { InsertUserParams, UserEntity } from "@/domain/entities/user-entity";
+import { UserRepository } from "@/domain/repositories/user-repository";
 import { Subscribe } from "../subscribe";
 
 export class SubscribeImpl implements Subscribe {

@@ -1,8 +1,8 @@
 import { Request } from "express";
 
-import { SubscribeImpl } from "../../../../use-cases/user-use-cases/impl/subscribe-impl";
-import { createUserValidation } from "../../../../validations/insert-user-validation";
-import { UserPrismaRepositoryAdapter } from "../../../adapters/orm/prisma/user-prisma-repository-adapter";
+import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
+import { createUserValidation } from "@/validations/insert-user-validation";
+import { UserPrismaRepositoryAdapter } from "@/infra/adapters/orm/prisma/user-prisma-repository-adapter";
 
 export class UserController {
   constructor(private readonly repository: UserPrismaRepositoryAdapter) {}

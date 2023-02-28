@@ -1,9 +1,6 @@
-import {
-  InsertUserParams,
-  UserEntity,
-} from "../../../../domain/entities/user-entity";
-import { UserRepository } from "../../../../domain/repositories/user-repository";
-import { MainRepository } from "../../../services/prisma-services";
+import { InsertUserParams, UserEntity } from "@/domain/entities/user-entity";
+import { UserRepository } from "@/domain/repositories/user-repository";
+import { MainRepository } from "@/infra/services/prisma-services";
 
 export class UserPrismaRepositoryAdapter implements UserRepository {
   constructor(private readonly repository: MainRepository) {}
