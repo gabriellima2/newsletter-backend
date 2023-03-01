@@ -5,16 +5,16 @@ import {
   createUserValidation,
   deleteUserValidation,
 } from "@/validations/user-validations";
-
-import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
-import { UserEntity } from "@/domain/entities/user-entity";
-import { IDomainError } from "@/domain/errors/domain-error";
-
 import {
   HttpStatusCode,
   defaultHeaders,
 } from "@/data/protocols/http-protocols";
+
 import { UnsubscribeImpl } from "@/use-cases/user-use-cases/impl/unsubscribe-impl";
+import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
+
+import { IDomainError } from "@/domain/errors/domain-error";
+import { UserEntity } from "@/domain/entities/user-entity";
 
 export class UserController {
   constructor(private readonly repository: UserPrismaRepositoryAdapter) {}
@@ -61,9 +61,9 @@ export class UserController {
       };
     } catch (error) {
       return {
-        ...defaultHeaders<unknown>({
+        ...defaultHeaders<IDomainError>({
           statusCode: HttpStatusCode.badRequest,
-          body: error,
+          body: error as IDomainError,
         }),
       };
     }

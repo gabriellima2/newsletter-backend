@@ -1,10 +1,17 @@
+import type {
+  PrismaClientKnownRequestError,
+  PrismaClientUnknownRequestError,
+} from "@prisma/client/runtime";
+
+import { MainRepository } from "@/infra/services/prisma-services";
+
 import {
   CreateUserParams,
   DeleteUserParams,
   UserEntity,
 } from "@/domain/entities/user-entity";
 import { UserRepository } from "@/domain/repositories/user-repository";
-import { MainRepository } from "@/infra/services/prisma-services";
+import { DomainError } from "@/domain/errors/domain-error";
 
 export class UserPrismaRepositoryAdapter implements UserRepository {
   constructor(private readonly repository: MainRepository) {}
@@ -14,8 +21,12 @@ export class UserPrismaRepositoryAdapter implements UserRepository {
       const insertedUser = await this.repository.user.create({ data });
       return Object.freeze(insertedUser);
     } catch (err) {
-      console.error(err);
-      process.exit(1);
+      throw new DomainError({
+        hasError: true,
+        message:
+          ((err as PrismaClientKnownRequestError).meta?.cause as string) ||
+          (err as PrismaClientUnknownRequestError).message,
+      });
     } finally {
       await this.repository.$disconnect();
     }
@@ -26,8 +37,12 @@ export class UserPrismaRepositoryAdapter implements UserRepository {
       const removedUser = await this.repository.user.delete({ where: { id } });
       return Object.freeze(removedUser);
     } catch (err) {
-      console.error(err);
-      process.exit(1);
+      throw new DomainError({
+        hasError: true,
+        message:
+          ((err as PrismaClientKnownRequestError).meta?.cause as string) ||
+          (err as PrismaClientUnknownRequestError).message,
+      });
     } finally {
       await this.repository.$disconnect();
     }
