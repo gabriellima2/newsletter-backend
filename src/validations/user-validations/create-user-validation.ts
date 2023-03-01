@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { CreateUserParams } from "@/domain/entities/user-entity";
-import { IDomainError } from "@/domain/errors/domain-error";
+import { IDefaultError } from "@/domain/errors/default-error";
 
 const userSchema = z.object({
   email: z
@@ -13,7 +13,7 @@ const userSchema = z.object({
 
 export function createUserValidation({
   email,
-}: CreateUserParams): IDomainError {
+}: CreateUserParams): IDefaultError {
   const validated = userSchema.safeParse({ email });
   if (validated.success) return { hasError: false, message: undefined };
   return { hasError: true, message: validated.error.issues[0].message };

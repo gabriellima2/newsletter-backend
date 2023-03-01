@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { DeleteUserParams } from "@/domain/entities/user-entity";
-import { IDomainError } from "@/domain/errors/domain-error";
+import { IDefaultError } from "@/domain/errors/default-error";
 
 const userSchema = z.object({
   id: z
@@ -12,7 +12,7 @@ const userSchema = z.object({
     .int({ message: "Tipo inválido. Esperava um número inteiro" }),
 });
 
-export function deleteUserValidation({ id }: DeleteUserParams): IDomainError {
+export function deleteUserValidation({ id }: DeleteUserParams): IDefaultError {
   const validated = userSchema.safeParse({ id });
   if (validated.success) return { hasError: false, message: undefined };
   return { hasError: true, message: validated.error.issues[0].message };

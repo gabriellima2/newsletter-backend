@@ -13,7 +13,7 @@ import {
 import { UnsubscribeImpl } from "@/use-cases/user-use-cases/impl/unsubscribe-impl";
 import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
 
-import { IDomainError } from "@/domain/errors/domain-error";
+import { IDefaultError } from "@/domain/errors/default-error";
 import { UserEntity } from "@/domain/entities/user-entity";
 
 export class UserController {
@@ -36,9 +36,9 @@ export class UserController {
       };
     } catch (error) {
       return {
-        ...defaultHeaders<IDomainError>({
+        ...defaultHeaders<IDefaultError>({
           statusCode: HttpStatusCode.badRequest,
-          body: error as IDomainError,
+          body: error as IDefaultError,
         }),
       };
     }
@@ -61,9 +61,9 @@ export class UserController {
       };
     } catch (error) {
       return {
-        ...defaultHeaders<IDomainError>({
+        ...defaultHeaders<IDefaultError>({
           statusCode: HttpStatusCode.badRequest,
-          body: error as IDomainError,
+          body: error as IDefaultError,
         }),
       };
     }

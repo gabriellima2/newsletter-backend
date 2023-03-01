@@ -11,7 +11,7 @@ import {
   UserEntity,
 } from "@/domain/entities/user-entity";
 import { UserRepository } from "@/domain/repositories/user-repository";
-import { DomainError } from "@/domain/errors/domain-error";
+import { DefaultError } from "@/domain/errors/default-error";
 
 export class UserPrismaRepositoryAdapter implements UserRepository {
   constructor(private readonly repository: MainRepository) {}
@@ -21,7 +21,7 @@ export class UserPrismaRepositoryAdapter implements UserRepository {
       const insertedUser = await this.repository.user.create({ data });
       return Object.freeze(insertedUser);
     } catch (err) {
-      throw new DomainError({
+      throw new DefaultError({
         hasError: true,
         message:
           ((err as PrismaClientKnownRequestError).meta?.cause as string) ||
@@ -37,7 +37,7 @@ export class UserPrismaRepositoryAdapter implements UserRepository {
       const removedUser = await this.repository.user.delete({ where: { id } });
       return Object.freeze(removedUser);
     } catch (err) {
-      throw new DomainError({
+      throw new DefaultError({
         hasError: true,
         message:
           ((err as PrismaClientKnownRequestError).meta?.cause as string) ||
