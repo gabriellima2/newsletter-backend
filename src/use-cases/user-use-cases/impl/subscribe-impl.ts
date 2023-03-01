@@ -10,8 +10,8 @@ export class SubscribeImpl implements Subscribe {
   ) {}
 
   async execute(data: CreateUserParams): Promise<UserEntity> {
-    const validationResult = this.validation(data);
-    if (validationResult.hasError) throw new DomainError(validationResult);
+    const validated = this.validation(data);
+    if (validated.hasError) throw new DomainError(validated);
     return await this.repository.create(data);
   }
 }

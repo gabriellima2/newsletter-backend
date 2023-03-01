@@ -14,10 +14,7 @@ const userSchema = z.object({
 export function createUserValidation({
   email,
 }: CreateUserParams): IDomainError {
-  const validate = userSchema.safeParse({ email });
-  if (validate.success) return { hasError: false, message: undefined };
-  return {
-    hasError: true,
-    message: validate.error.issues[0].message,
-  };
+  const validated = userSchema.safeParse({ email });
+  if (validated.success) return { hasError: false, message: undefined };
+  return { hasError: true, message: validated.error.issues[0].message };
 }
