@@ -8,6 +8,7 @@ import {
 
 import { SubscribeImpl } from "@/use-cases/user-use-cases/impl/subscribe-impl";
 import { UserEntity } from "@/domain/entities/user-entity";
+import { IDomainError } from "@/domain/errors/domain-error";
 
 import {
   HttpStatusCode,
@@ -35,9 +36,9 @@ export class UserController {
       };
     } catch (error) {
       return {
-        ...defaultHeaders<unknown>({
+        ...defaultHeaders<IDomainError>({
           statusCode: HttpStatusCode.badRequest,
-          body: error,
+          body: error as IDomainError,
         }),
       };
     }
