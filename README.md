@@ -1,6 +1,6 @@
 # Newsletter - Backend
 
-Para praticar Clean Architecture, desenvolvi esse projeto para semelhante à uma inscrição em um sistema de newsletter.
+Para praticar Clean Architecture, desenvolvi esse projeto semelhante à uma inscrição em um sistema de newsletter.
 Explorei bastante as camadas da Clean Architecture e vou usar esse projeto como base para outros que irei implementar com essa arquitetura!
 
 <h2>Dificuldades</h2>
