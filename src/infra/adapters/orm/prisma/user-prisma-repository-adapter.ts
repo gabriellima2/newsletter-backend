@@ -18,6 +18,10 @@ export class UserPrismaRepositoryAdapter implements UserRepository {
 
   async create(data: CreateUserParams): Promise<UserEntity> {
     try {
+      const alreadyHasEmail = await this.repository.user.findUnique({
+        where: { email: data.email },
+      });
+      if (alreadyHasEmail) throw new Error("E-mail já cadastrado!");
       const insertedUser = await this.repository.user.create({ data });
       return Object.freeze(insertedUser);
     } catch (err) {

@@ -3,11 +3,13 @@ export interface IDefaultError {
   hasError: boolean;
 }
 
-export class DefaultError extends Error {
-  public readonly data: IDefaultError;
+export class DefaultError implements IDefaultError {
+  public readonly message: string | undefined;
+  public readonly hasError: boolean;
 
-  constructor(data: IDefaultError) {
-    super(data.message);
-    this.data = data;
+  constructor(params: IDefaultError) {
+    const { message, hasError } = params;
+    this.hasError = hasError;
+    this.message = message;
   }
 }
